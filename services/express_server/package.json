@@ -1,0 +1,13 @@
+{
+  "name": "express_server",
+  "version": "1.0.0",
+  "description": "A simple api server in express",
+  "main": "index.js",
+  "repository": "https://github.com/alexisjanvier/javascript-playground",
+  "author": "Alexis Janvier <contact@alexisjanvier.net>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "4.16.2"
+  }
+}
