@@ -1,0 +1,19 @@
+{
+    "env": {
+        "es6": true,
+        "jest": true
+    },
+    "extends": ["react-app", "plugin:prettier/recommended", "plugin:jest/recommended"],
+    "rules": {
+        "prettier/prettier": ["error", {
+            "singleQuote": true,
+            "tabWidth": 4,
+            "trailingComma": "all"
+        }],
+        "jest/consistent-test-it": [
+            "error",
+            {"fn": "it"}
+        ]
+    }
+}
+
