@@ -6,15 +6,15 @@
     "isomorphic-fetch": "2.2.1",
     "jsonwebtoken": "8.2.0",
     "prop-types": "15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
     "react-redux": "5.0.7",
     "react-router": "4.2.0",
     "react-router-dom": "4.2.2",
     "react-router-redux": "4.0.8",
     "react-scripts": "1.1.1",
     "redux": "3.7.2",
-    "redux-actions": "2.2.1",
+    "redux-actions": "2.3.0",
     "redux-saga": "0.16.0"
   },
   "scripts": {
@@ -24,16 +24,16 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "eslint": "^4.1.1",
+    "babel-eslint": "8.2.2",
+    "eslint": "4.19.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-config-react-app": "2.1.0",
-    "eslint-plugin-flowtype": "^2.34.1",
-    "eslint-plugin-import": "^2.6.0",
-    "eslint-plugin-jest": "21.12.3",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-flowtype": "2.46.1",
+    "eslint-plugin-import": "2.9.0",
+    "eslint-plugin-jest": "21.15.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-prettier": "2.6.0",
-    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-react": "7.7.0",
     "prettier": "1.11.1"
   }
 }
