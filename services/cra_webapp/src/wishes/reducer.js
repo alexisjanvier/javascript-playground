@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 
 import { LOAD_WISHES, LOAD_WISHES_ERROR, LOAD_WISHES_SUCCESS } from './actions';
+import { LOGOUT } from '../authentication/actions';
 
 export const defaultState = {
     data: null,
@@ -23,6 +24,7 @@ export const reducer = handleActions(
             loading: false,
             data: payload,
         }),
+        [LOGOUT]: () => defaultState,
     },
     defaultState,
 );

@@ -7,11 +7,12 @@ import { ConnectedRouter } from 'react-router-redux';
 import styled from 'styled-components';
 
 import { Header } from './components/Header';
+import { NoMatch } from './components/NoMatch';
 import Home from './home/Home';
 import Talks from './talks/Talks';
 import Wishes from './wishes/Wishes';
 import Members from './members/Members';
-import { NoMatch } from './components/NoMatch';
+import Authentication from './authentication/Authentication';
 
 const Container = styled.div`
     text-align: center;
@@ -27,6 +28,7 @@ export const App = ({ store, history }) => (
                     <Route path="/talks" component={Talks} />
                     <Route path="/wishes" component={Wishes} />
                     <Route path="/members" component={Members} />
+                    <Route path="/login" component={Authentication} />
                     <Route component={NoMatch} />
                 </Switch>
             </Container>

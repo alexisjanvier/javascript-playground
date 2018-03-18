@@ -5,6 +5,7 @@ import {
     LOAD_MEMBERS_ERROR,
     LOAD_MEMBERS_SUCCESS,
 } from './actions';
+import { LOGOUT } from '../authentication/actions';
 
 export const defaultState = {
     data: null,
@@ -27,6 +28,7 @@ export const reducer = handleActions(
             loading: false,
             data: payload,
         }),
+        [LOGOUT]: () => defaultState,
     },
     defaultState,
 );

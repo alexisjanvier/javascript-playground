@@ -14,10 +14,12 @@ export const parseResponse = mode => response => {
     throw error;
 };
 
-export const appFetch = ({ url, ...config }, mode = 'json') =>
+export const appFetch = ({ url, ...config }, token, mode = 'json') =>
     fetch(url, {
+        ...config,
         headers: {
             Accept: 'application/json',
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         },
     })

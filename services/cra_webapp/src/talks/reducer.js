@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 
 import { LOAD_TALKS, LOAD_TALKS_ERROR, LOAD_TALKS_SUCCESS } from './actions';
+import { LOGOUT } from '../authentication/actions';
 
 export const defaultState = {
     data: null,
@@ -23,6 +24,7 @@ export const reducer = handleActions(
             loading: false,
             data: payload,
         }),
+        [LOGOUT]: () => defaultState,
     },
     defaultState,
 );
