@@ -1,0 +1,14 @@
+{
+    "talks": [
+      { "id": 1, "title": "The Case for Whimsy", "resume": "This talk explores various ways that we, as front-end developers, can make our products more delightful to use. While it’s design’s job to give us static mock-ups, it’s our job to bring those designs to life.", "memberId": 1 },
+      { "id": 2, "title": "Native vs Javascript", "resume": "For the past year Krzysztof has been working on react-native-gesture-handler – a library that exposes low level platform native capabilities related to gesture and touch handling to React Native.", "memberId": 2 }
+    ],
+    "wishes": [
+        { "id": 1, "title": "Replicated Redux", "memberId": 3 }
+      ],
+    "members": [
+      { "id": 1, "name": "Joshua Comeau", "login": "joshua", "password": "password" },
+      { "id": 2, "name": "Krzysztof Magiera", "login": "krzysztof", "password": "password" },
+      { "id": 3, "name": "John Do", "login": "john", "password": "password" }
+    ]
+  }
