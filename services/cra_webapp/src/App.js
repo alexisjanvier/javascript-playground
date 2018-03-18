@@ -1,37 +1,40 @@
-import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+
 import styled from 'styled-components';
 
 import { Header } from './components/Header';
-import { Home } from './home/Home';
-import { Talks } from './talks/Talks';
-import { Wishes } from './wishes/Wishes';
-import { Members } from './members/Members';
+import Home from './home/Home';
+import Talks from './talks/Talks';
+import Wishes from './wishes/Wishes';
+import Members from './members/Members';
 import { NoMatch } from './components/NoMatch';
 
 const Container = styled.div`
     text-align: center;
 `;
 
-class App extends Component {
-    render() {
-        return (
+export const App = ({ store, history }) => (
+    <Provider store={store}>
+        <ConnectedRouter history={history}>
             <Container>
-                <Router>
-                    <Fragment>
-                        <Header />
-                        <Switch>
-                            <Route exact path="/" component={Home} />
-                            <Route path="/talks" component={Talks} />
-                            <Route path="/wishes" component={Wishes} />
-                            <Route path="/members" component={Members} />
-                            <Route component={NoMatch} />
-                        </Switch>
-                    </Fragment>
-                </Router>
+                <Header />
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/talks" component={Talks} />
+                    <Route path="/wishes" component={Wishes} />
+                    <Route path="/members" component={Members} />
+                    <Route component={NoMatch} />
+                </Switch>
             </Container>
-        );
-    }
-}
+        </ConnectedRouter>
+    </Provider>
+);
 
-export default App;
+App.propTypes = {
+    store: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+};
