@@ -1,20 +1,35 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import styled from 'styled-components';
+
+import { Header } from './components/Header';
+import { Home } from './home/Home';
+import { Talks } from './talks/Talks';
+import { Wishes } from './wishes/Wishes';
+import { Members } from './members/Members';
+import { NoMatch } from './components/NoMatch';
+
+const Container = styled.div`
+    text-align: center;
+`;
 
 class App extends Component {
     render() {
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to
-                    reload.
-                </p>
-            </div>
+            <Container>
+                <Router>
+                    <Fragment>
+                        <Header />
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route path="/talks" component={Talks} />
+                            <Route path="/wishes" component={Wishes} />
+                            <Route path="/members" component={Members} />
+                            <Route component={NoMatch} />
+                        </Switch>
+                    </Fragment>
+                </Router>
+            </Container>
         );
     }
 }
