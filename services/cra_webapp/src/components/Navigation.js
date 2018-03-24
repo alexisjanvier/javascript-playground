@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const StyledLink = styled(Link)`
     color: white;
@@ -19,24 +18,16 @@ const Logout = styled.span`
     cursor: pointer;
 `;
 
-export class Navigation extends Component {
-    handleLogout = () => {
-        window.sessionStorage.removeItem('token');
-    };
+export const Navigation = ({ onLogout }) => (
+    <nav>
+        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to="/talks">Talks</StyledLink>
+        <StyledLink to="/wishes">Wishes</StyledLink>
+        <StyledLink to="/members">Members</StyledLink>
+        <Logout onClick={onLogout}>Logout</Logout>
+    </nav>
+);
 
-    render() {
-        const isLogged = true;
-        if (!isLogged) {
-            return <Redirect to="/login" />;
-        }
-        return (
-            <nav>
-                <StyledLink to="/">Home</StyledLink>
-                <StyledLink to="/talks">Talks</StyledLink>
-                <StyledLink to="/wishes">Wishes</StyledLink>
-                <StyledLink to="/members">Members</StyledLink>
-                <Logout onClick={this.handleLogout}>Logout</Logout>
-            </nav>
-        );
-    }
-}
+Navigation.propTypes = {
+    onLogout: PropTypes.func.isRequired,
+};

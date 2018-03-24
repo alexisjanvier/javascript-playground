@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 
 import host from './services/host';
-import { appFetch } from './services/fetch/fetch';
+import { appFetch } from './services/fetch';
 import { Spinner } from './components/Spinner';
 
 export class DataProvider extends Component {

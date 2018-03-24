@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Redirect } from 'react-router';
 
 import { TextField } from './TextField';
+import { appFetch } from '../services/fetch';
+import host from '../services/host';
 
 const LoginForm = styled.form`
     margin: 0 auto,
@@ -16,23 +19,50 @@ const LoginTitle = styled.h1`
 `;
 
 export class Authentication extends Component {
+    static propTypes = {
+        location: PropTypes.object.isRequired,
+        onNewToken: PropTypes.func.isRequired,
+    };
+
     state = {
         login: '',
         password: '',
+        redirectToReferrer: false,
     };
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.login(this.state);
+        const { login, password } = this.state;
+
+        appFetch({
+            url: `${host}/login`,
+            body: JSON.stringify({ login, password }),
+            method: 'POST',
+        })
+            .then(({ response: { token } }) => {
+                this.props.onNewToken(token);
+                this.setState({ error: null, redirectToReferrer: true });
+            })
+            .catch(error => {
+                this.setState({ error });
+            });
     };
+
     handleChange = name => event => {
         event.preventDefault();
         this.setState({ [name]: event.target.value });
     };
 
     render() {
-        const { error } = this.props;
-        const { login, password } = this.state;
+        const { error, login, password, redirectToReferrer } = this.state;
+        const { from } = this.props.location.state || {
+            from: { pathname: '/' },
+        };
+
+        if (redirectToReferrer) {
+            return <Redirect to={from} />;
+        }
+
         return (
             <LoginForm id="login_form" onSubmit={this.handleSubmit}>
                 <LoginTitle>Connectez-vous !</LoginTitle>
@@ -58,10 +88,3 @@ export class Authentication extends Component {
         );
     }
 }
-
-Authentication.propTypes = {
-    error: PropTypes.shape({
-        message: PropTypes.string.isRequired,
-    }),
-    login: PropTypes.func.isRequired,
-};
