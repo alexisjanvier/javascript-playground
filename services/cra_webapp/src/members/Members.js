@@ -1,29 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import { isLoading, getData } from './reducer';
-import { Spinner } from '../components/Spinner';
+import { DataProvider } from '../DataProvider';
 
-export const Members = ({ isLoading, members }) => (
+export const MembersView = ({ members }) => (
     <div>
         <h1>Members</h1>
-        {isLoading && <Spinner />}
         {members &&
             members.map(member => <h2 key={member.id}>{member.name}</h2>)}
     </div>
 );
 
-Members.propTypes = {
-    isLoading: PropTypes.bool.isRequired,
+MembersView.propTypes = {
     members: PropTypes.array,
 };
 
-const mapStateToProps = state => ({
-    isLoading: isLoading(state),
-    members: getData(state),
-});
+export const Members = ({ location }) => (
+    <DataProvider
+        url="/members"
+        location={location}
+        render={({ data }) => <MembersView members={data} />}
+    />
+);
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Members);
+Members.propTypes = {
+    location: PropTypes.object,
+};

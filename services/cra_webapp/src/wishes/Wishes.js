@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import { isLoading, getData } from './reducer';
-import { Spinner } from '../components/Spinner';
+import { DataProvider } from '../DataProvider';
 
-export const Wishes = ({ isLoading, wishes }) => (
+export const WishesView = ({ wishes }) => (
     <div>
         <h1>Wishes</h1>
-        {isLoading && <Spinner />}
         {wishes && wishes.map(wish => <h2 key={wish.id}>{wish.title}</h2>)}
     </div>
 );
 
-Wishes.propTypes = {
-    isLoading: PropTypes.bool.isRequired,
+WishesView.propTypes = {
     wishes: PropTypes.array,
 };
 
-const mapStateToProps = state => ({
-    isLoading: isLoading(state),
-    wishes: getData(state),
-});
+export const Wishes = ({ location }) => (
+    <DataProvider
+        url="/wishes"
+        location={location}
+        render={({ data }) => <WishesView wishes={data} />}
+    />
+);
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Wishes);
+Wishes.propTypes = {
+    location: PropTypes.object,
+};

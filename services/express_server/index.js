@@ -27,22 +27,22 @@ server.post('/login', (req, res) => {
     });
 });
 
-server.use(
-    jwt({
-        secret: 'thisisheadertoken',
-        requestProperty: 'header',
-        getToken: function fromHeader(req) {
-            if (
-                req.headers.authorization &&
-                req.headers.authorization.split(' ')[0] === 'Bearer'
-            ) {
-                return req.headers.authorization.split(' ')[1];
-            }
-            return null;
-        },
-        exp: '1h',
-    }).unless({ path: ['/login'] }),
-);
+// server.use(
+//     jwt({
+//         secret: 'thisisheadertoken',
+//         requestProperty: 'header',
+//         getToken: function fromHeader(req) {
+//             if (
+//                 req.headers.authorization &&
+//                 req.headers.authorization.split(' ')[0] === 'Bearer'
+//             ) {
+//                 return req.headers.authorization.split(' ')[1];
+//             }
+//             return null;
+//         },
+//         exp: '1h',
+//     }).unless({ path: ['/login'] }),
+// );
 
 server.use(router);
 server.listen(3001, () => {

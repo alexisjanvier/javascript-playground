@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import { isLoading, getData } from './reducer';
-import { Spinner } from '../components/Spinner';
+import { DataProvider } from '../DataProvider';
 
-export const Talks = ({ isLoading, talks }) => (
+export const TalksView = ({ talks }) => (
     <div>
         <h1>Talks</h1>
-        {isLoading && <Spinner />}
         {talks && talks.map(talk => <h2 key={talk.id}>{talk.title}</h2>)}
     </div>
 );
 
-Talks.propTypes = {
-    isLoading: PropTypes.bool.isRequired,
+TalksView.propTypes = {
     talks: PropTypes.array,
 };
 
-const mapStateToProps = state => ({
-    isLoading: isLoading(state),
-    talks: getData(state),
-});
+export const Talks = ({ location }) => (
+    <DataProvider
+        url="/talks"
+        location={location}
+        render={({ data }) => <TalksView talks={data} />}
+    />
+);
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Talks);
+Talks.propTypes = {
+    location: PropTypes.object,
+};

@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
-import { logout } from '../authentication/actions';
-import { isLogged } from '../authentication/reducer';
 
 const StyledLink = styled(Link)`
     color: white;
@@ -23,15 +19,13 @@ const Logout = styled.span`
     cursor: pointer;
 `;
 
-// export const Navigation = ({ isLogged, logout }) => (
 export class Navigation extends Component {
     handleLogout = () => {
         window.sessionStorage.removeItem('token');
-        this.props.logout();
     };
 
     render() {
-        const { isLogged } = this.props;
+        const isLogged = true;
         if (!isLogged) {
             return <Redirect to="/login" />;
         }
@@ -46,18 +40,3 @@ export class Navigation extends Component {
         );
     }
 }
-
-Navigation.propTypes = {
-    isLogged: PropTypes.bool.isRequired,
-    logout: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = state => ({
-    isLogged: isLogged(state),
-});
-
-const mapDispatchToProps = {
-    logout,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

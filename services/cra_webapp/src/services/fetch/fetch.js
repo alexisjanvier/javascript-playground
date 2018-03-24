@@ -14,7 +14,7 @@ export const parseResponse = mode => response => {
     throw error;
 };
 
-export const appFetch = ({ url, ...config }, token, mode = 'json') =>
+export const appFetch = ({ url, ...config }, token = null, mode = 'json') =>
     fetch(url, {
         ...config,
         headers: {

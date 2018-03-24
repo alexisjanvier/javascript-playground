@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { TextField } from './TextField';
-
-import { login } from './actions';
 
 const LoginForm = styled.form`
     margin: 0 auto,
@@ -18,7 +15,7 @@ const LoginTitle = styled.h1`
     margin-bottom: 3rem,
 `;
 
-export class AuthenticationComponent extends Component {
+export class Authentication extends Component {
     state = {
         login: '',
         password: '',
@@ -62,21 +59,9 @@ export class AuthenticationComponent extends Component {
     }
 }
 
-AuthenticationComponent.propTypes = {
+Authentication.propTypes = {
     error: PropTypes.shape({
         message: PropTypes.string.isRequired,
     }),
     login: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = state => ({
-    error: state.authentication.error,
-});
-
-const mapDispatchToProps = {
-    login,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-    AuthenticationComponent,
-);
