@@ -4,7 +4,11 @@
         "node": true,
         "jest": true
     },
-    "extends": ["plugin:prettier/recommended", "plugin:jest/recommended"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "plugin:jest/recommended"
+    ],
     "rules": {
         "prettier/prettier": ["error", {
             "singleQuote": true,
