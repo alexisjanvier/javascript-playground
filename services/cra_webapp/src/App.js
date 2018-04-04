@@ -16,6 +16,11 @@ const Container = styled.div`
     text-align: center;
 `;
 
+export const UserContext = React.createContext({
+    user: null,
+    onLogout: () => true,
+});
+
 export class App extends Component {
     state = {
         user: null,
@@ -47,52 +52,55 @@ export class App extends Component {
     render() {
         const { user } = this.state;
         return (
-            <Router>
-                <Container>
-                    <Header user={user} onLogout={this.handleLogout} />
-                    <Switch>
-                        <PrivateRoute
-                            exact
-                            path="/"
-                            render={({ location }) => (
-                                <Home location={location} />
-                            )}
-                            user={user}
-                        />
-                        <PrivateRoute
-                            path="/talks"
-                            render={({ location }) => (
-                                <Talks location={location} />
-                            )}
-                            user={user}
-                        />
-                        <PrivateRoute
-                            path="/wishes"
-                            render={({ location }) => (
-                                <Wishes location={location} />
-                            )}
-                            user={user}
-                        />
-                        <PrivateRoute
-                            path="/members"
-                            render={({ location }) => (
-                                <Members location={location} />
-                            )}
-                            user={user}
-                        />
-                        <Route
-                            path="/login"
-                            render={({ location }) => (
-                                <Authentication
-                                    location={location}
-                                    onNewToken={this.handleNewToken}
-                                />
-                            )}
-                        />
-                        <Route component={NoMatch} />
-                    </Switch>
-                </Container>
-            </Router>
+            <UserContext.Provider
+                value={{
+                    user,
+                    onLogout: this.handleLogout,
+                }}
+            >
+                <Router>
+                    <Container>
+                        <Header />
+                        <Switch>
+                            <PrivateRoute
+                                exact
+                                path="/"
+                                render={({ location }) => (
+                                    <Home location={location} />
+                                )}
+                            />
+                            <PrivateRoute
+                                path="/talks"
+                                render={({ location }) => (
+                                    <Talks location={location} />
+                                )}
+                            />
+                            <PrivateRoute
+                                path="/wishes"
+                                render={({ location }) => (
+                                    <Wishes location={location} />
+                                )}
+                            />
+                            <PrivateRoute
+                                path="/members"
+                                render={({ location }) => (
+                                    <Members location={location} />
+                                )}
+                            />
+                            <Route
+                                path="/login"
+                                render={({ location }) => (
+                                    <Authentication
+                                        location={location}
+                                        onNewToken={this.handleNewToken}
+                                    />
+                                )}
+                            />
+                            <Route component={NoMatch} />
+                        </Switch>
+                    </Container>
+                </Router>
+            </UserContext.Provider>
         );
     }
 }

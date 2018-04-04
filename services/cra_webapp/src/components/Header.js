@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { UserContext } from '../App';
 import { Navigation } from './Navigation';
 
 const StyledHeader = styled.header`
@@ -15,14 +16,24 @@ const Title = styled.h1`
     font-size: 1.5em;
 `;
 
-export const Header = ({ user, onLogout }) => (
+export const HeaderWithoutContext = ({ user, onLogout }) => (
     <StyledHeader>
         <Title>JavaScript Playground: meetups</Title>
         {user && <Navigation onLogout={onLogout} />}
     </StyledHeader>
 );
 
-Header.propTypes = {
+HeaderWithoutContext.propTypes = {
     user: PropTypes.object,
     onLogout: PropTypes.func.isRequired,
+};
+
+export const Header = () => {
+    return (
+        <UserContext.Consumer>
+            {({ user, onLogout }) => (
+                <HeaderWithoutContext user={user} onLogout={onLogout} />
+            )}
+        </UserContext.Consumer>
+    );
 };
