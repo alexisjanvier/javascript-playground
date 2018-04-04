@@ -33,7 +33,6 @@ export class DataProvider extends Component {
     };
 
     fetchData = async props => {
-        this.setState({ isLoading: true });
         const url = `${host}${props.url}`;
         // Only display the loading indicator if the request takes more than 1 second
         setTimeout(() => {
@@ -41,9 +40,9 @@ export class DataProvider extends Component {
                 this.setState({ showIsLoading: true });
             }
         }, 1000);
-
+        const token = window.sessionStorage.getItem('token');
         try {
-            const data = await appFetch({ url });
+            const data = await appFetch({ url }, token);
             this.setState({
                 data: data.response,
                 error: null,

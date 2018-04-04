@@ -40,7 +40,7 @@ server.use(
             }
             return null;
         },
-        exp: '1h',
+        expiresIn: '1h',
     }).unless({ path: ['/login'] }),
 );
 
