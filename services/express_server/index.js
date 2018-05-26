@@ -13,7 +13,7 @@ server.post('/login', (req, res) => {
     const { login, password } = req.body;
 
     if (login !== 'login' || password !== 'password') {
-        return res.send(401);
+        return res.sendStatus(401);
     }
 
     const dataForToken = {
