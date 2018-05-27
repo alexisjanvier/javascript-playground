@@ -12,7 +12,7 @@ server.use(jsonServer.bodyParser);
 server.post('/login', (req, res) => {
     const { login, password } = req.body;
 
-    if (login !== 'login' || password !== 'password') {
+    if (login !== process.env.USER_LOGIN || password !== process.env.USER_PASSWORD) {
         return res.sendStatus(401);
     }
 
@@ -45,6 +45,7 @@ server.use(
 );
 
 server.use(router);
-server.listen(3001, () => {
-    console.log('JSON Server is running on port 3001');
+const port = process.env.BACK_PORT;
+server.listen(port, () => {
+    console.log(`JSON Server is running on port ${port}`);
 });
