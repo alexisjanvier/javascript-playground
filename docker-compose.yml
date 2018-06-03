@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+    back:
+        image: node:9-alpine
+        volumes:
+            - .:/app
+        ports:
+            - 3001:$BACK_PORT
+        working_dir: "/app/services/express_server"
+        command: "node index.js"
+        environment:
+            BACK_PORT: $BACK_PORT
+            USER_LOGIN: $USER_LOGIN
+            USER_PASSWORD: $USER_PASSWORD
+    front:
+        image: node:9-alpine
+        volumes:
+            - .:/app
+        ports:
+            - 3000:3000
+        working_dir: "/app/services/cra_webapp"
+        command: "yarn start"

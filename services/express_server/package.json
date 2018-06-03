@@ -7,6 +7,9 @@
   "author": "Alexis Janvier <contact@alexisjanvier.net>",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "body-parser": "1.18.3",
     "cors": "2.8.4",

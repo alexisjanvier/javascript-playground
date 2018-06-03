@@ -1,3 +1,4 @@
+const cors = require('cors');
 const jsonServer = require('json-server');
 const jwt = require('express-jwt');
 const jsonwebtoken = require('jsonwebtoken');
@@ -6,13 +7,16 @@ const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
+server.use(cors());
 server.use(middlewares);
 
 server.use(jsonServer.bodyParser);
 server.post('/login', (req, res) => {
     const { login, password } = req.body;
+    const configureLogin = process.env.USER_LOGIN || 'login';
+    const configurePassword = process.env.USER_PASSWORD || 'password';
 
-    if (login !== 'login' || password !== 'password') {
+    if (login !== configureLogin || password !== configurePassword) {
         return res.sendStatus(401);
     }
 
@@ -45,6 +49,7 @@ server.use(
 );
 
 server.use(router);
-server.listen(3001, () => {
-    console.log('JSON Server is running on port 3001');
+const port = process.env.BACK_PORT || 80;
+server.listen(port, () => {
+    console.log(`JSON Server is running on port ${port}`);
 });
