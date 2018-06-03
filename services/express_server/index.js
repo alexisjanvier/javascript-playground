@@ -1,3 +1,4 @@
+const cors = require('cors');
 const jsonServer = require('json-server');
 const jwt = require('express-jwt');
 const jsonwebtoken = require('jsonwebtoken');
@@ -6,6 +7,7 @@ const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
+server.use(cors());
 server.use(middlewares);
 
 server.use(jsonServer.bodyParser);
