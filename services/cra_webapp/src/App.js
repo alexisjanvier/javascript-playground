@@ -31,7 +31,7 @@ export class App extends Component {
         this.setState({ user });
     };
 
-    componentWillMount() {
+    componentDidMount() {
         const token = window.sessionStorage.getItem('token');
 
         if (token) {

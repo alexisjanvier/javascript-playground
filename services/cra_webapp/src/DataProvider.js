@@ -58,7 +58,7 @@ export class DataProvider extends Component {
         }
     };
 
-    componentWillMount() {
+    componentDidMount() {
         return this.fetchData(this.props);
     }
 
